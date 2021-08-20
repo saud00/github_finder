@@ -6,15 +6,14 @@ class ui{
     }
 
     userData(data){
-        console.log(data)
         this.profile.innerHTML = `
         <div class="card card-body">
             <div class="row">
-                    <div class="col-sm-3 text-center">
+                    <div class="col-sm-3 mt-1 text-center">
                         <img class="img-fluid" src=${data.avatar_url} alt="dp">
                         <button class="btn btn-primary rounded-pill mt-1">View profile</button>
                     </div>
-                    <div class="col-sm-9 mt-3">
+                    <div class="col-sm-9 mt-1">
                     <span>
                             <button class="btn btn-primary btn-sm" disabled>Public repos: ${data.public_repos} </button>
                         </span><span>
@@ -33,7 +32,7 @@ class ui{
                 </div>
             </div>
         </div>
-        <h1> Latest Repos</h1>
+        <h1 class='mt-5'> Latest Repos</h1>
 
         `
         
@@ -42,24 +41,9 @@ class ui{
     repoData(res){
 
         let output=''
-        console.log(res.length)
-        if(res.length == 1){
-          output=`
-            <div class="card card-body">
-            <div class="row">
-        <div class="col-md-5 text-primary">
-        ${res.name}
-        </div>
-        <div class="col-md-7">
-        <div class="badge badge-primary">stars: ${res.stars}</div>
-        <div class="badge badge-primary">forks: ${res.forks}</div>
-        <div class="badge badge-primary">watchers: ${res.watchers}</div>
-        </div>
-        </div>
-        </div>;`
-        }else{
-        output = res.forEach(function(val){ 
-            console.log(output)
+        
+        res.forEach(function(val){ 
+            
             output +=`
             <div class="card card-body">
             <div class="row">
@@ -67,15 +51,14 @@ class ui{
         ${val.name}
         </div>
         <div class="col-md-7">
-        <div class="badge badge-primary">stars: ${val.stars}</div>
-        <div class="badge badge-primary">forks: ${val.forks}</div>
-        <div class="badge badge-primary">watchers: ${val.watchers}</div>
+        <span class="badge bg-primary">stars: ${val.stars}</span>
+        <span class="badge bg-secondary">forks: ${val.forks}</span>
+        <span class="badge bg-info">watchers: ${val.watchers}</span>
         </div>
         </div>
-        </div>;`
-    })}
-    this.repoProfile.innerHTML =output
-    console.log(output)
-    
+        </div>`
+        
+    })
+    this.repoProfile.innerHTML = output
 }
 }
